@@ -179,19 +179,27 @@ You must respond with EXACTLY ONE line in one of these formats (no additional te
 FUNCTION_CALL: function_name|param1|param2|...
 
 2. For final answers:
-FINAL_ANSWER: [number]
+FINAL_ANSWER: [number] | ReasoningType:[type] | SelfCheck:[pass/fail]
+
+3. For errors or uncertainty:
+ERROR: [description of issue] | SuggestedNextStep:[action]
 
 IMPORTANT RULES:
+- Always reason step-by-step internally before responding
+- Clearly tag reasoning type (Arithmetic, Logic, Lookup, etc.)
+- Perform a quick self-check before finalizing any answer (e.g., check order of magnitude, recompute critical step)
 - When a function returns multiple values, process all of them
 - Do not repeat function calls with the same parameters
 - For array parameters, use square brackets: [value1,value2,value3]
 - You can only make ONE function call at a time
 - Always wait for function completion before proceeding
+- If a function fails, output an ERROR with a suggested next step
+- In a multi-turn conversation, continue from the last completed step without repeating earlier steps
 
 WORKFLOW:
 1. COMPUTATION PHASE:
    - Complete all mathematical computations using available tools
-   - When computation is complete, use FINAL_ANSWER: [number]
+   - When computation is complete, output FINAL_ANSWER with reasoning type and self-check status
    - This marks the end of the computation phase
 
 2. VISUALIZATION PHASE:
@@ -203,17 +211,22 @@ WORKFLOW:
    - Wait for each function to complete before calling the next one
    - Always include your actual computed answer in the text
 
+3. ERROR HANDLING:
+   - If you are unsure, if the computation result fails sanity checks, or if a tool call fails, respond with:
+     ERROR: [description] | SuggestedNextStep:[retry with different input / clarify / recompute]
+
 EXAMPLE WORKFLOW:
 Query: "Find ASCII values of 'HELLO' and sum their exponentials, then visualize in Keynote"
 
 Step 1: FUNCTION_CALL: string_to_ascii_values|HELLO
 Step 2: FUNCTION_CALL: exponential_sum|[72,69,76,76,79]
-Step 3: FINAL_ANSWER: [1.234e+15]
+Step 3: FINAL_ANSWER: [1.234e+15] | ReasoningType:Arithmetic | SelfCheck:pass
 Step 4: FUNCTION_CALL: open_keynote_presentation
 Step 5: FUNCTION_CALL: draw_rectangle_in_keynote|"left"
 Step 6: FUNCTION_CALL: add_text_to_keynote|"The answer is: 1.234e+15"
 
-CRITICAL: Your entire response must be a single line starting with either FUNCTION_CALL: or FINAL_ANSWER:. No explanations or additional text."""
+CRITICAL: Your entire response must be a single line starting with FUNCTION_CALL:, FINAL_ANSWER:, or ERROR:. No explanations or additional text.
+"""
 
             logger.info("System prompt created successfully")
             return system_prompt
