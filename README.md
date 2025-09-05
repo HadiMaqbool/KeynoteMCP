@@ -298,7 +298,7 @@ This project demonstrates:
 
 **Senior AI Engineer**  
 Email: hakeemhadi94@gmail.com  
-LinkedIn: [Your LinkedIn Profile](https://linkedin.com/hhm29)  
+LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/hhm29)  
 GitHub: [Your GitHub Profile](https://github.com/HadiMaqbool)
 
 ---
