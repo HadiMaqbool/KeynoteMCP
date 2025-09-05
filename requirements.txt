@@ -1,0 +1,28 @@
+# Keynote MCP Server - AI-Powered Presentation Automation
+# Dependencies for integrating LLMs with Keynote through MCP (Model Context Protocol)
+
+# Core MCP Framework
+mcp>=1.0.0                    # Model Context Protocol framework for LLM integration
+
+# AI/ML Dependencies
+google-generativeai>=0.8.0    # Google Gemini AI client for LLM integration
+python-dotenv>=1.0.0          # Environment variable management
+
+# Image Processing
+Pillow>=10.0.0                # Python Imaging Library for image manipulation
+
+# macOS Automation
+pyautogui>=0.9.54             # Cross-platform GUI automation for Keynote control
+applescript>=1.0.0            # AppleScript integration for macOS applications
+screeninfo>=0.8.1             # Multi-monitor support for screen coordinate detection
+
+# Development and Testing (optional)
+pytest>=7.0.0                 # Testing framework
+pytest-asyncio>=0.21.0        # Async testing support
+black>=23.0.0                 # Code formatting
+flake8>=6.0.0                 # Linting
+mypy>=1.0.0                   # Type checking
+
+# Documentation (optional)
+sphinx>=7.0.0                 # Documentation generation
+sphinx-rtd-theme>=1.3.0       # Read the Docs theme
